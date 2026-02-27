@@ -31,7 +31,7 @@ public:
 
   // If expired, advance the start by one interval (useful for periodic timers)
   // and return true. Otherwise return false.
-  bool expired() const { 
+  bool isExpired() const {
     if (util_nowMillis() < _start) {
       _start = util_nowMillis();
       return true; // handle millis() overflow
@@ -42,6 +42,8 @@ public:
     _start += _interval;
     return true;
   }
+
+  void reset() { _start = util_nowMillis(); }
 
 private:
   ms_t _interval;
